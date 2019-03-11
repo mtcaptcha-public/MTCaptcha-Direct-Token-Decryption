@@ -1,7 +1,7 @@
 # mtcaptcha-v1-token-decrypt
 Sample (Java) Code on Decrypting and Checking MTCaptcha Verified-Tokens on Server side, without API calls
 
-License: Apache 2.0
+License: Apache 2.0 <br>
 Provided as is as reference. 
 
 See Javadoc
