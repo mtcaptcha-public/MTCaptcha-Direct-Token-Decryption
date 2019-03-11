@@ -10,3 +10,7 @@ See Javadoc
 <a href="http://htmlpreview.github.io/?https://github.com/mtcaptcha-public/mtcaptcha-v1-token-decrypt/blob/master/mtcaptcha-v1-token-decrypt/javadoc/com/mtcap/v1/verifiedtoken/customerdecoder/MTCaptchaTokenDecoderAndChecker.html" > MTCaptchaTokenDecoderAndChecker.html </a> <br>
 See Sourcecode
 <a href="https://github.com/mtcaptcha-public/mtcaptcha-v1-token-decrypt/blob/master/mtcaptcha-v1-token-decrypt/src/java/com/mtcap/v1/verifiedtoken/customerdecoder/MTCaptchaTokenDecoderAndChecker.java"> MTCaptchaTokenDecoderAndChecker.java </a>
+
+
+To file defects or feature requests, please submit an issue at <br >
+https://github.com/mtcaptcha-public/jsfallback-recapthca-to-mtcaptcha/issues <br >
