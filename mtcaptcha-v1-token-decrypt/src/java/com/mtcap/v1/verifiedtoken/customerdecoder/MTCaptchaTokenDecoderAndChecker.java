@@ -22,7 +22,7 @@ import org.apache.commons.codec.binary.Hex;
  * </p>
  * 
  * <p>
- * license		https://www.apache.org/licenses/LICENSE-2.0  <br>
+ * license		Apache 2.0  <br>
  * copyright	MTCatpcha 2019 <br>
  * </p>
  * 
@@ -104,7 +104,7 @@ import org.apache.commons.codec.binary.Hex;
  *
  * </pre>
  * 
- *  <hr >
+ * <hr >
  * 
  * <p>
  * Encryption/Decryption Algo: AES/CBC/PKCS5Padding  with 128bit key <br>
@@ -113,6 +113,23 @@ import org.apache.commons.codec.binary.Hex;
  * </p> 
  * 
  * <br >
+ * <b>Sample Token and Token Decrypt Results</b>
+ * <pre>
+ * 
+ * 
+ * SampleToken1String    = v1(000eda01,eee7c778,MTPublic-hal9000uJ,4a774475f03ba00a2f122110af25461d,yCq1U1SO8fjrXGhcwRk8KWM9SFcOWWfYSwmgJHcbV_Uupa7bLOtXA5NaOaZQkMy0gLDWp72iVkizPTgy9HBFLihmXHUcLs2zHGjQXB1NoWObCWBNiKG3HcqIvSEbQNRfE6yig-vO5O1D3BPH7wdoUl_0YpzZZ4Vi1r--5IYVbZLmYa8Et1lKTHb7m9B40Zn1gspdO34wUYiWZX6WGmSBHSuCTe2-s4FOVTQh1-5qnfGUnWfZYpRN4zLvbnqFq3NpAL_PZvn0PyjNvCbmwv2K16GUCTxkm14nfVHTP_CovJoXJo7LV-arGFVFYixCnwzf4C5DHFJkfn76Kgy3wS1Eog**)
+ * SampleToken1Decrypted = {"v":"1.0","code":201,"codeDesc":"valid:captcha-solved","tokID":"34715559cd42d3955114303c925c3582","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"some.example.com","isDevHost":false,"action":"","ip":"10.10.10.10"}
+ * 
+ * SampleToken2String    = v1(980daee9,c265c978,MTPublic-hal9000uJ,495dbab6165529c22c38dfd3494bcfd5,n25YpNxDyzRURm_msNoW9bACoDg4HmqdXirSjqOfRSCuzwFKNI5z1L-KhHPe0hRz7tTIzjlFpHlkkdUYSlVZdxAAZq4_rkoCGUZ8FmngAr2-6t6EHXgD43l7AqyCReeReAkGeckV2eNfDzqToAC5epo0LBxJ7X0y-PcNIlseN4BPAbhFm5hV_9YhXGuXdWjqDxQSbqzwBXh2CjQ2893cRHAbFEyQzZShsiiubXdQYoY-jszt5DySVjnEQRFlzRnWT6H9gk6EioSX0U5BvSu1cH86Rfg1MwUSXpjYapt_eZWctp9VSWkDdPE1hw8hB6LVYHIjjrSvBqit8lrCpNRoNQ**)
+ * SampleToken2Decrypted = {"v":"1.0","code":211,"codeDesc":"valid:ip-whitelisted","tokID":"542de54b4ff00b5c3148802e10eeed4b","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"more.example.com","isDevHost":true,"action":"login","ip":"10.10.10.10"}
+ *
+ *		
+ * Sample privatekey	= MTPrivat-hal9000uJ-WsPXwe3BatWpGZaEbja2mcO5r7h1h1PkFW2fRoyGRrp4ZH6yfq
+ * Sample sitekey		= MTPublic-hal9000uJ
+ * 
+ * </pre>
+ * 
+ * <hr >
  * 
  * <p>
  * DEPENDENCIES  <br>
@@ -653,11 +670,21 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	public static void runDemo()
 	{
 		
-		String token	= "v1(2f03cc7d,1058dfde,MTPublic-hal9000uJ,34715559cd42d3955114303c925c3582,kSdkIYABYAKSmXze77v8oC1zCpBQJAOeCNaD8Q9ZnHTl3XTJ49KNll-FR3T-yzqE23CncDtF1o6IiyoCPEAeVnWshzllM0TqppHtp7KzGMJiUEApltXGHYlK6V2EasR-pNCaJo99k0W8tm5OR2kt5xefFH-cYypRRzIWzoppZMSntamR6SVYCotqfwKJ8OMb9WkYpoBV3e7_sjDUe-3_b_t55Sdf5CqmBkZWNkV0nbKdP9fngrmaDD3yJLkuUbKRBFySB7KHCgFgzVpzEQndCK0NcbFuuGbxbzYXmoxo8nKQsPVJB7s-vBu1Z5ZfD400bRfUTGoj8BH6w4RQD5qOCQ**)";
-		//token			= "v1(6f270109,f0fbd331,MTPublic-hal9000uJ,542de54b4ff00b5c3148802e10eeed4b,A_v_IaSJYRsQxnQ8YC_LBqjLxxBzAG9twcjR3aRgfT3lTXUboq-r2CnuAkE6LPT6nrGB9tT2mS7WRWUAei0I18JerMdEFHcLLsCwfA1Ngef1AQQjqRWS8bl9rAb4RBk_6394PcTmKY8zb8RwCpU0dzRJkcy_AAdniEiNAotlI2qhyym8w35Io2gs10Kmt8ij30YaEuATOb18HC5jafr0UtVVBmzNNVYRdG9rwEf-LQuz_VEiYiYDCe1bEA4iruDcy_VyHi0zykBiXgaHFs5hL8Wt3FyZwC6JbQjnXenM7T3TiuHHCwzOVdnPS5JhCmu62bJKzOerXL6T1P6-PqswrA**)";
-
+		String token1		= "v1(4a73c0ca,8793eb1b,MTPublic-hal9000uJ,adc8dad64a0dbc89c8adbfb315135a9e,eR9SmMaGRafgcFQsIKXvxW8r4nymbmBnlynA4jwsgOt_XO_IaxFa55c1O-qsQJQiNwPilInS4UBN_skpTQa_JyR1-aPWO_PxjlBUJr3djAk5vxQ9cITkL1rf-gRPr-ho8cEfK5AiAc_GJAyeI65UblJ4AZFg7en5dOsSpTHVEA6ISj-q1Ye5fqUf9e0nHQXu01XyIn4xY6QHhqNVSfVKCG3l8MLDuf8EOCyPsmPx8zmxe-5Dd6UJ8F43sWe_PZeDFrxuab5QzUeVDlbXbiWAcQetWAbtaqbrd-3PyydnnlqftfWPfs9ihC6qI6evMmVz5ZCiAnNvO0QX_NuCJYpYDQ**)";
+		String token1Json	= "{\"v\":\"1.0\",\"code\":201,\"codeDesc\":\"valid:captcha-solved\",\"tokID\":\"34715559cd42d3955114303c925c3582\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"some.example.com\",\"isDevHost\":false,\"action\":\"\",\"ip\":\"10.10.10.10\"}";
+							  // {"v":"1.0","code":201,"codeDesc":"valid:captcha-solved","tokID":"34715559cd42d3955114303c925c3582","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"some.example.com","isDevHost":false,"action":"","ip":"10.10.10.10"}
 		
-		String privatekey	= "hal9000uJ-WsPXwe3BatWpGZaEbja2mcO5r7h1h1PkFW2fRoyGRrp4ZH6yfq";
+		String token2		= "v1(0e798202,5d5f720c,MTPublic-hal9000uJ,ed0a316d94101c86886f5408cb0efa91,6i9SkZMiBmDRUfSi2YgZKsFn8_oVAFwqDG9eGW8gfed9-zz_2STbkWIynDodBfMzURDYCaORsbB2X0rU7CqNv8SBKbKv1jnatsJvhtbkwfj75lJxEFf1W_YtZTV1AL_MMl8lyPc5UcTEIWiApANWlnN83KkeC6MONXH_TzGwbjTuKbyW2Sf4HgVH3qiP60snBuKhI9DgXdvYB23mBUduzs1COlpQk4jZa8Tb-WfKEpHzA0VDM7XvQw4HQmtlt7V49JAk7F0qHO-VHFRVH3dLOqLqPPkGCHNAZJbGf79wEUrzL095-OhFfVMa5lVv1gt9vTQmsLUsQZSQfvyW4pnesw**)";
+		String token2Json	= "{\"v\":\"1.0\",\"code\":211,\"codeDesc\":\"valid:ip-whitelisted\",\"tokID\":\"542de54b4ff00b5c3148802e10eeed4b\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"more.example.com\",\"isDevHost\":true,\"action\":\"login\",\"ip\":\"10.10.10.10\"}";
+							// {"v":"1.0","code":211,"codeDesc":"valid:ip-whitelisted","tokID":"542de54b4ff00b5c3148802e10eeed4b","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"more.example.com","isDevHost":true,"action":"login","ip":"10.10.10.10"}
+
+		String token		= token1;
+		String tokenJson	= token1Json;
+
+		token		= token2;
+		tokenJson	= token2Json;		
+		
+		String privatekey	= "MTPrivat-hal9000uJ-WsPXwe3BatWpGZaEbja2mcO5r7h1h1PkFW2fRoyGRrp4ZH6yfq";
 		String sitekey		= "MTPublic-hal9000uJ";
 		
 		
@@ -668,9 +695,10 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 		DecodedMTTokenInfo di = decoder.decodeMTToken(privatekey, token);
 	
 		
-			System.out.println("DecodeError:  \t"+di.decodeErrorMsg);
-			System.out.println("TokenInfoJson:\t"+di.tokenInfoJson);
-			System.out.println("TokenInfoPojo:\t"+decoder.gson.toJson(di.tokenInfoPojo));		
+			System.out.println("DecodeError:          \t"+di.decodeErrorMsg);
+			System.out.println("MatchesExpectedJson:  \t"+tokenJson.equals(di.tokenInfoJson));
+			System.out.println("TokenInfoJson:        \t"+di.tokenInfoJson );
+			System.out.println("TokenInfoPojo:        \t"+decoder.gson.toJson(di.tokenInfoPojo));		
 
 			System.out.println();
 		
