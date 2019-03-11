@@ -104,6 +104,16 @@ import org.apache.commons.codec.binary.Hex;
  *
  * </pre>
  * 
+ *  <hr >
+ * 
+ * <p>
+ * Encryption/Decryption Algo: AES/CBC/PKCS5Padding  with 128bit key <br>
+ * Hash Algo: MD5  <br>
+ * Text to Binary Encoding: UTF8  <br>
+ * </p> 
+ * 
+ * <br >
+ * 
  * <p>
  * DEPENDENCIES  <br>
  * - Google GSON 2.8.2+  <br>
