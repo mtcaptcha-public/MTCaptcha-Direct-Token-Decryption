@@ -4,7 +4,7 @@ Sample (Java) code to Decrypt and Validate MTCaptcha Verified-Tokens directly on
 See [MTCaptcha.com](https://www.mtcaptcha.com/) <br >
 MTCaptcha is a smart and beautiful looking Captcha service build for the enterprise with attention specially towards Privacy (GDPR) and Accessibility (VPAT).  
 
-<img src="https://raw.githubusercontent.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/master/_www/assets/sample-01.png" title="MTCaptcha Sample Screenshot 01"/>
+<img src="https://raw.githubusercontent.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/master/_www/assets/sample-01-sm.png" title="MTCaptcha Sample Screenshot 01"/>
 
 
 License: [Apache 2.0](https://github.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/blob/master/LICENSE) <br>
