@@ -13,4 +13,4 @@ See Sourcecode
 
 
 To file defects or feature requests, please submit an issue at <br >
-https://github.com/mtcaptcha-public/mtcaptcha-v1-token-decrypt/issues <br >
+[Project Issues](https://github.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/issues) <br >
