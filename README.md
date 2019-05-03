@@ -1,7 +1,7 @@
 # MTCaptcha (v1) VerifiedToken Server Side Decrypt
 Sample (Java) Code on Decrypting and Checking MTCaptcha Verified-Tokens on Server side, without API calls
 
-See https://www.mtcaptcha.com/ <br >
+See [MTCaptcha.com](https://www.mtcaptcha.com/) <br >
 
 License: Apache 2.0 <br>
 Provided as is for reference. 
