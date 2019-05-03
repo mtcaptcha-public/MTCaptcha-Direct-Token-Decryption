@@ -1,1 +1,10 @@
 theme: jekyll-theme-slate
+
+plugins:
+  - jekyll-seo-tag
+  
+title: MTCaptcha Direct Token Decryption Sample Code
+
+description: Sample Java code to Decrypt and Validate MTCaptcha Verified-Tokens directly on server side, without API calls
+
+author: https://www.mtcaptcha.com
