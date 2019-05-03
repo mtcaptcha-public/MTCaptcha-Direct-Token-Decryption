@@ -1,5 +1,5 @@
 # MTCaptcha (v1) VerifiedToken Server Side Decrypt
-Sample (Java) Code on Decrypting and Checking MTCaptcha Verified-Tokens on Server side, without API calls
+Sample (Java) code to Decrypt and Validate MTCaptcha Verified-Tokens directly on server side, without API calls
 
 See [MTCaptcha.com](https://www.mtcaptcha.com/) <br >
 
