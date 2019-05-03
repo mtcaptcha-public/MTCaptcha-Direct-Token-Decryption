@@ -2,9 +2,9 @@
 Sample (Java) code to Decrypt and Validate MTCaptcha Verified-Tokens directly on server side, without API calls
 
 See [MTCaptcha.com](https://www.mtcaptcha.com/) <br >
-MTCaptcha is a smart and beautiful Captcha service build for the enterprise with attention specially towards Privacy (GDPR) and Accessibility (VPAT).  
+MTCaptcha is a smart and beautiful looking Captcha service build for the enterprise with attention specially towards Privacy (GDPR) and Accessibility (VPAT).  
 
-License: [Apache 2.0](./LICENSE.html) <br>
+License: [Apache 2.0](https://github.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/blob/master/LICENSE) <br>
 Provided as is for reference. 
 
 See Javadoc
