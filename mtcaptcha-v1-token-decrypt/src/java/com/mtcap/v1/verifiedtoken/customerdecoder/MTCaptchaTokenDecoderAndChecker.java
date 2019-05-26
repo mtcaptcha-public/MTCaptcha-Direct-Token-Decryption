@@ -18,7 +18,9 @@ import org.apache.commons.codec.binary.Hex;
 
 /**
  * <p>
- * Sample java code to Decrypt and Check MTCaptcha Verified Token
+ * Java code to Decrypt and Check MTCaptcha Verified Token
+ * MTCaptcha: https://www.mtcaptcha.com
+ * Ref: https://www.mtcaptcha.com/dev-guide-validate-token
  * </p>
  * 
  * <p>
@@ -36,8 +38,8 @@ import org.apache.commons.codec.binary.Hex;
  * 
  * Example use: 
  * 
- *   MTCaptchaTokenDecoderAndChecker decoder	= new MTCaptchaTokenDecoderAndChecker();
- *   MTCaptchaTokenDecoderAndChecker.DecodedMTTokenInfo di	= null;
+ *   MTCaptchaTokenDecoderAndChecker	decoder	= new MTCaptchaTokenDecoderAndChecker();
+ *   DecodedMTTokenInfo					di		= null;
  * 
  *   boolean  isSuccess = false;
  * 
@@ -82,11 +84,18 @@ import org.apache.commons.codec.binary.Hex;
  * 
  * <pre>
  * 
- *  Sample Verified-Token
+ *  Sample Verified-Token String
  *  v1(2f03cc7d,1058dfde,MTPublic-hal9000uJ,34715559cd42d3955114303c925c3582,kSdkIYABYAKSmXze77v8oC1zCpBQJAOeCNaD8Q9ZnHTl3XTJ49KNll-FR3T-yzqE23CncDtF1o6IiyoCPEAeVnWshzllM0TqppHtp7KzGMJiUEApltXGHYlK6V2EasR-pNCaJo99k0W8tm5OR2kt5xefFH-cYypRRzIWzoppZMSntamR6SVYCotqfwKJ8OMb9WkYpoBV3e7_sjDUe-3_b_t55Sdf5CqmBkZWNkV0nbKdP9fngrmaDD3yJLkuUbKRBFySB7KHCgFgzVpzEQndCK0NcbFuuGbxbzYXmoxo8nKQsPVJB7s-vBu1Z5ZfD400bRfUTGoj8BH6w4RQD5qOCQ**)
  * 
- *  VerifiedToken Structure
- *  "v1("  [MTCaptcha CheckSum]  "," [Customer Checksum] "," [Sitekey] "," [Random Seed] "," [Encrypted TokenInfo] ")"
+ *  Verified-Token Structure 
+ *  "v1("  [MTCaptcha CheckSum]   ","  [Customer Checksum]  ","  [Sitekey]  ","  [Random Seed]  ","  [Encrypted TokenInfo]  ")"
+ * 
+ *  [CalculatedCustomerCheckSum]     = MD5( [Privatekey] + [SiteKey] + [Random Seed] + [Encrypted TokenInfo] ) .toHexLowercase() .substring(0,8)
+ *  [EncryptedTokenInfoBinary]       = URLSafeBase64.decode( [Encrypted TokenInfo].replace("*","=") );
+ *  [SingleUseDecryptionKey128bit]   = MD5( [Privatekey] + [Random Seed] )
+ *  [AesIV]						     = [SingleUseDecryptionKey128bit] 
+ *  [DecryptedTokenInfoJson]         = AES.decrpyt( "CBC/PKCS5Padding", [SingleUseDecryptionKey128bit], [AesIV], [EncryptedTokenInfoBinary] ) 
+ *  
  * 
  *  Sample TokenInfo Decrypted (JSON)
  *  {
@@ -477,7 +486,7 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	{
 		
 		// Convert all token text components to bytes using UTF8 encoding
-		// CustomerCheckSum = MD5( privatekey + siteKey + randomSeed + tokenInfoEncrypted ) .lowercaseHex() .substring(0,8) 
+		// CustomerCheckSum  = MD5( [privatekey] + [SiteKey] + [Random Seed] + [Encrypted TokenInfo] ) .toHexLowercase() .substring(0,8) 
 		
 		
 		byte[] privatekeyBytes	= di.privatekey.getBytes(StandardCharsets.UTF_8);
@@ -595,72 +604,7 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 
 	}
 
-	//////////////////////////////////////////// 
-	 
-	/**
-	 * Class that holds the different state and components during decryption and checking
-	 */
-	public static class DecodedMTTokenInfo
-	{
-		// INPUT
-		transient String  privatekey = null;
-		String token				 = null;
-		
-		// DECODE INTERMEDIATE 
-		String mtChecksum			= null;
-		String customerChecksum		= null;
-		String siteKey				= null;
-		String randomSeed			= null;
-		String tokenInfoEncrypted	= null;
-		
-		boolean decodeSuccess		= false;
-		String decodeErrorMsg		= null;
-		
-		// DECODE RESULT
-		String			tokenInfoJson	= null;
-		MTTokenInfoPojo	tokenInfoPojo	= null;
 
-		// CHECK RESULT
-		boolean			checkSuccess	= false;	
-		String			checkFailMsg	= null;
-		
-		protected DecodedMTTokenInfo()
-		{}
-		
-		protected void init(String privatekey, String token)
-		{
-			this.token		= token;
-			this.privatekey	= privatekey;
-			this.checkSuccess	= false;
-		}
-	}	 
-	
-	/**
-	 * Class that maps to the JSON TokenInfo
-	 */
-	public static class MTTokenInfoPojo
-	{
-		public MTTokenInfoPojo()
-		{}
-		
-		public String	v;
-		public Integer	code;
-		public String	codeDesc;
-		public String	tokID;
-		public Long		timestampSec;
-		public String	timestampISO;
-		public String	hostname;
-		public Boolean	isDevHost;
-		public String	action;
-		public String	ip;
-		
-	}
-	
-	
-	///////////////////////////////////////////////
-	///////////////////////////////////////////////
-	
-	
 	/** Sample Running the code */
 	public static void main(String[] args)
 	{
@@ -671,18 +615,16 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	{
 		
 		String token1		= "v1(4a73c0ca,8793eb1b,MTPublic-hal9000uJ,adc8dad64a0dbc89c8adbfb315135a9e,eR9SmMaGRafgcFQsIKXvxW8r4nymbmBnlynA4jwsgOt_XO_IaxFa55c1O-qsQJQiNwPilInS4UBN_skpTQa_JyR1-aPWO_PxjlBUJr3djAk5vxQ9cITkL1rf-gRPr-ho8cEfK5AiAc_GJAyeI65UblJ4AZFg7en5dOsSpTHVEA6ISj-q1Ye5fqUf9e0nHQXu01XyIn4xY6QHhqNVSfVKCG3l8MLDuf8EOCyPsmPx8zmxe-5Dd6UJ8F43sWe_PZeDFrxuab5QzUeVDlbXbiWAcQetWAbtaqbrd-3PyydnnlqftfWPfs9ihC6qI6evMmVz5ZCiAnNvO0QX_NuCJYpYDQ**)";
-		String token1Json	= "{\"v\":\"1.0\",\"code\":201,\"codeDesc\":\"valid:captcha-solved\",\"tokID\":\"34715559cd42d3955114303c925c3582\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"some.example.com\",\"isDevHost\":false,\"action\":\"\",\"ip\":\"10.10.10.10\"}";
-							  // {"v":"1.0","code":201,"codeDesc":"valid:captcha-solved","tokID":"34715559cd42d3955114303c925c3582","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"some.example.com","isDevHost":false,"action":"","ip":"10.10.10.10"}
-		
+		String token1Json	= "{\"v\":\"1.0\",\"code\":201,\"codeDesc\":\"valid:captcha-solved\",\"tokID\":\"adc8dad64a0dbc89c8adbfb315135a9e\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"some.example.com\",\"isDevHost\":false,\"action\":\"\",\"ip\":\"10.10.10.10\"}";
+							
 		String token2		= "v1(0e798202,5d5f720c,MTPublic-hal9000uJ,ed0a316d94101c86886f5408cb0efa91,6i9SkZMiBmDRUfSi2YgZKsFn8_oVAFwqDG9eGW8gfed9-zz_2STbkWIynDodBfMzURDYCaORsbB2X0rU7CqNv8SBKbKv1jnatsJvhtbkwfj75lJxEFf1W_YtZTV1AL_MMl8lyPc5UcTEIWiApANWlnN83KkeC6MONXH_TzGwbjTuKbyW2Sf4HgVH3qiP60snBuKhI9DgXdvYB23mBUduzs1COlpQk4jZa8Tb-WfKEpHzA0VDM7XvQw4HQmtlt7V49JAk7F0qHO-VHFRVH3dLOqLqPPkGCHNAZJbGf79wEUrzL095-OhFfVMa5lVv1gt9vTQmsLUsQZSQfvyW4pnesw**)";
-		String token2Json	= "{\"v\":\"1.0\",\"code\":211,\"codeDesc\":\"valid:ip-whitelisted\",\"tokID\":\"542de54b4ff00b5c3148802e10eeed4b\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"more.example.com\",\"isDevHost\":true,\"action\":\"login\",\"ip\":\"10.10.10.10\"}";
-							// {"v":"1.0","code":211,"codeDesc":"valid:ip-whitelisted","tokID":"542de54b4ff00b5c3148802e10eeed4b","timestampSec":981173106,"timestampISO":"2001-02-03T04:05:06Z","hostname":"more.example.com","isDevHost":true,"action":"login","ip":"10.10.10.10"}
-
+		String token2Json	= "{\"v\":\"1.0\",\"code\":211,\"codeDesc\":\"valid:ip-whitelisted\",\"tokID\":\"ed0a316d94101c86886f5408cb0efa91\",\"timestampSec\":981173106,\"timestampISO\":\"2001-02-03T04:05:06Z\",\"hostname\":\"more.example.com\",\"isDevHost\":true,\"action\":\"login\",\"ip\":\"10.10.10.10\"}";
+							
 		String token		= token1;
 		String tokenJson	= token1Json;
 
-		token		= token2;
-		tokenJson	= token2Json;		
+		//token		= token2;
+		//tokenJson	= token2Json;		
 		
 		String privatekey	= "MTPrivat-hal9000uJ-WsPXwe3BatWpGZaEbja2mcO5r7h1h1PkFW2fRoyGRrp4ZH6yfq";
 		String sitekey		= "MTPublic-hal9000uJ";
