@@ -47,7 +47,7 @@ import org.apache.commons.codec.binary.Hex;
  *   String   expectionAction = "login";
  *   Boolean  isProductionEnv = true;    
  * 
- *   <font color="blue">
+ *   <font style="color:blue">
  *   di = decoder.decodeMTToken(privatekey, token);
  * 
  *   if( di.decodeSuccess)
@@ -461,6 +461,7 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	 * 
 	 * @return The binary 128bit decryption key
 	 * 
+	 * @throws NoSuchAlgorithmException if MD5 digest is not found 
 	 */
 	protected byte[] getOneTimeEncryptionKey(String privatekey, String randomSeed)throws NoSuchAlgorithmException
 	{
@@ -481,6 +482,10 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	
 	/**
 	 * Validate the checksum matches and the token is not tampered
+	 * 
+	 * @param di The DecodedMTTokenInfo
+	 * 
+	 * @return true if the token has not been tampered and matches checksum
 	 */
 	protected boolean  validateCustomerChecksum(DecodedMTTokenInfo di)
 	{
@@ -525,6 +530,10 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	
 	/**
 	* Parse and unpack the token into its components
+	* 
+	* @param di The DecodedMTTokenInfo
+	* 
+	* @return true if the token matches format and is successfully parsed into its components
 	*/
 	protected boolean unpackToken(DecodedMTTokenInfo di)
 	{
@@ -605,7 +614,9 @@ System.out.println("WARN! FOR MULTISERVER ENVS, NEED TO REPLACE THIS CODE: "+thi
 	}
 
 
-	/** Sample Running the code */
+	/** Sample Running the code 
+	 @param args This is not used
+	 */
 	public static void main(String[] args)
 	{
 		runDemo();
