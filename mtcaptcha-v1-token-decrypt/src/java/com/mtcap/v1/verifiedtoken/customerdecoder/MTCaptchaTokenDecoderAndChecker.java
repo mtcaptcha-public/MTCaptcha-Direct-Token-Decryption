@@ -18,9 +18,9 @@ import org.apache.commons.codec.binary.Hex;
 
 /**
  * <p>
- * Java code to Decrypt and Check MTCaptcha Verified Token
- * MTCaptcha: https://www.mtcaptcha.com
- * Ref: https://www.mtcaptcha.com/dev-guide-validate-token
+ * Java code to Decrypt and Check MTCaptcha Verified Token  <br>
+ * MTCaptcha: https://www.mtcaptcha.com  <br>
+ * Ref: https://www.mtcaptcha.com/dev-guide-validate-token <br>
  * </p>
  * 
  * <p>
