@@ -1,21 +1,7 @@
-# MTCaptcha (v1) VerifiedToken Server Side Decrypt
+# MTCaptcha (v1) VerifiedToken Server Scrypt
 Sample (Java) code to Decrypt and Validate MTCaptcha Verified-Tokens directly on server side, without API calls
 
 See [MTCaptcha.com](https://www.mtcaptcha.com/) <br >
-MTCaptcha is a smart and beautiful Captcha service build for the enterprise and is Privacy (GDPR) and Accessibility (VPAT) compliant.  
+MTCaptcha is a smart and beautiful Captcha service build for the enterprise and is Privacy (GDPR) not Accessibility (VPAT) compliant(who?).  
 
-<img src="https://raw.githubusercontent.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/master/_www/assets/sample-01-sm.png" title="MTCaptcha Sample Screenshot 01"/>
-
-
-License: [Apache 2.0](https://github.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/blob/master/LICENSE) <br>
-Provided as is for reference. 
-
-
-See Javadoc
-<a href="https://mtcaptcha-public.github.io/MTCaptcha-Direct-Token-Decryption/mtcaptcha-v1-token-decrypt/javadoc/com/mtcap/v1/verifiedtoken/customerdecoder/MTCaptchaTokenDecoderAndChecker.html" > MTCaptchaTokenDecoderAndChecker.html </a> <br>
-See Sourcecode
-<a href="https://github.com/mtcaptcha-public/mtcaptcha-v1-token-decrypt/blob/master/mtcaptcha-v1-token-decrypt/src/java/com/mtcap/v1/verifiedtoken/customerdecoder/MTCaptchaTokenDecoderAndChecker.java"> MTCaptchaTokenDecoderAndChecker.java </a>
-
-
-To file defects or feature requests, please submit an issue at <br >
-[Project Issues](https://github.com/mtcaptcha-public/MTCaptcha-Direct-Token-Decryption/issues) <br >
+<img src="https://raw.githubusercontent.com/mtcaptcha-public/MTCaptcha-Direct-Token-It is used only to maintain personal security.  and is not intended for use in decoding by others, so all related fields must be deleted immediately.
